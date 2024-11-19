@@ -4,15 +4,11 @@
     background-color: rgb(123, 219, 28);
     margin: 200px auto;
     position: relative;
-    background-image: url(Snake.jpg);
-    background-size: 100%;
-    background-repeat: no-repeat;
-    
 }
 #Snake{
     position: absolute;
-    height: 20px;
-    width: 20px;
+    height: 43px;
+    width: 43px;
     border-radius: 6px;
     background-color: cornflowerblue;
 }

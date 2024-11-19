@@ -43,7 +43,7 @@ function pauseGame() {
   setIntervalid = null;
 }
 function restartGame() {
-  if ((setIntervalid = setInterval(loopGame, 1000))) {
+  if ((setIntervalid = setInterval(loopGame, 500))) {
     setIntervalid = null;
     headtop = 40;
     headleft = 20;
