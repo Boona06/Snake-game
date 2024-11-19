@@ -9,12 +9,17 @@
 </head>
 
 <body>
+    <div id="gamecontrol">
+        <button onclick="startGame()">start</button>
+        <button onclick="pauseGame()">pause</button>
+        <button onclick="restartGame()">restart</button>
+    </div>
     <div id="board"></div>
     <div id="button">
-        <button onclick="goUp()">up</button>
-        <button onclick="goDown()">down</button>
-        <button onclick="goleft()">left</button>
-        <button onclick="goRight()">right</button>
+        <button onclick="changeDirection('up')">up</button>
+        <button onclick="changeDirection('down')">down</button>
+        <button onclick="changeDirection('left')">left</button>
+        <button onclick="changeDirection('right')">right</button>
     </div>
     <script src="script.js"></script>
 </body>
