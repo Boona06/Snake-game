@@ -2,25 +2,37 @@ let headtop = 20;
 let headleft = 20;
 let direction = "up";
 let setIntervalid = null;
+const boardel = document.getElementById("board");
 function render() {
   let snakeHtml = `<div id="Snake" class="Snake" style="top: ${headtop}px; left:${headleft}px"></div>`;
-  const boardel = document.getElementById("board");
   boardel.innerHTML = snakeHtml;
 }
 function goUp() {
   headtop = headtop - 30;
+  if (headtop < 0) {
+    headtop = boardel.style.height - 1;
+  }
   render();
 }
 function goleft() {
   headleft = headleft - 30;
+  if (headleft < 0) {
+    headleft = boardel.style.width - 1;
+  }
   render();
 }
 function goDown() {
   headtop = headtop + 30;
+  if (headtop === boardel.style.height) {
+    headtop = boardel.style.height + 1;
+  }
   render();
 }
 function goRight() {
   headleft = headleft + 30;
+  if (headleft === boardel.style.width) {
+    headleft = boardel.style.width + 1;
+  }
   render();
 }
 function changeDirection(newDirection) {
@@ -43,7 +55,6 @@ function pauseGame() {
   setIntervalid = null;
 }
 function restartGame() {
-  setIntervalid = null;
   headtop = 20;
   headleft = 20;
 }
@@ -73,6 +84,8 @@ function keyControl(event) {
     changeDirection("right");
   } else if (keyboard == "ArrowLeft") {
     changeDirection("left");
+  } else if (keyboard == "Space") {
+    startGame();
   }
   console.log(event);
 }
