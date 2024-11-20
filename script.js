@@ -1,5 +1,5 @@
-let headtop = 65;
-let headleft = 65;
+let headtop = 20;
+let headleft = 20;
 let direction = "up";
 let setIntervalid = null;
 function render() {
@@ -8,19 +8,19 @@ function render() {
   boardel.innerHTML = snakeHtml;
 }
 function goUp() {
-  headtop = headtop - 43.75;
+  headtop = headtop - 30;
   render();
 }
 function goleft() {
-  headleft = headleft - 43.75;
+  headleft = headleft - 30;
   render();
 }
 function goDown() {
-  headtop = headtop + 43.75;
+  headtop = headtop + 30;
   render();
 }
 function goRight() {
-  headleft = headleft + 43.75;
+  headleft = headleft + 30;
   render();
 }
 function changeDirection(newDirection) {
@@ -36,18 +36,16 @@ function changeDirection(newDirection) {
 }
 
 function startGame() {
-  if (!setIntervalid) setIntervalid = setInterval(loopGame, 1000);
+  if (!setIntervalid) setIntervalid = setInterval(loopGame, 100);
 }
 function pauseGame() {
   clearInterval(setIntervalid);
   setIntervalid = null;
 }
 function restartGame() {
-  if ((setIntervalid = setInterval(loopGame, 500))) {
-    setIntervalid = null;
-    headtop = 40;
-    headleft = 20;
-  }
+  setIntervalid = null;
+  headtop = 20;
+  headleft = 20;
 }
 function loopGame() {
   switch (direction) {
@@ -65,7 +63,18 @@ function loopGame() {
       break;
   }
 }
-// function handlekey(event) {
-// }
-// document.addEventListener("keydown", handlekey);
+function keyControl(event) {
+  const keyboard = event.key;
+  if (keyboard == "ArrowUp") {
+    changeDirection("up");
+  } else if (keyboard == "ArrowDown") {
+    changeDirection("down");
+  } else if (keyboard == "ArrowRight") {
+    changeDirection("right");
+  } else if (keyboard == "ArrowLeft") {
+    changeDirection("left");
+  }
+  console.log(event);
+}
+document.addEventListener("keydown", keyControl);
 render();
