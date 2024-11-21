@@ -2,92 +2,113 @@ let headtop = 20;
 let headleft = 20;
 let direction = "up";
 let setIntervalid = null;
+
 const boardel = document.getElementById("board");
+const boardHeight = 400; 
+const boardWidth = 400;  
+
 function render() {
-  let snakeHtml = `<div id="Snake" class="Snake" style="top: ${headtop}px; left:${headleft}px"></div>`;
-  boardel.innerHTML = snakeHtml;
+    let snakeHtml = `<div id="Snake" class="Snake" style="top: ${headtop}px; left:${headleft}px"></div>`;
+    boardel.innerHTML = snakeHtml;
 }
+
 function goUp() {
-  headtop = headtop - 30;
-  if (headtop < 0) {
-    headtop = boardel.style.height - 1;
-  }
-  render();
+    headtop -= 20;
+    if (headtop < 0) {
+        headtop = boardHeight - 20; 
+    }
+    render();
 }
-function goleft() {
-  headleft = headleft - 30;
-  if (headleft < 0) {
-    headleft = boardel.style.width - 1;
-  }
-  render();
-}
+
 function goDown() {
-  headtop = headtop + 30;
-  if (headtop === boardel.style.height) {
-    headtop = boardel.style.height + 1;
-  }
-  render();
+    headtop += 20;
+    if (headtop >= boardHeight) {
+        headtop = 0; 
+    }
+    render();
 }
+
+function goleft() {
+    headleft -= 20;
+    if (headleft < 0) {
+        headleft = boardWidth - 20; 
+    }
+    render();
+}
+
 function goRight() {
-  headleft = headleft + 30;
-  if (headleft === boardel.style.width) {
-    headleft = boardel.style.width + 1;
-  }
-  render();
+    headleft += 20;
+    if (headleft >= boardWidth) {
+        headleft = 0; 
+    }
+    render();
 }
+
 function changeDirection(newDirection) {
-  if (direction === "up" || direction === "down") {
-    if (newDirection === "left" || newDirection === "right") {
-      direction = newDirection;
+    if (direction === "up" || direction === "down") {
+        if (newDirection === "left" || newDirection === "right") {
+            direction = newDirection;
+        }
+    } else if (direction === "left" || direction === "right") {
+        if (newDirection === "up" || newDirection === "down") {
+            direction = newDirection;
+        }
     }
-  } else if (direction === "left" || direction === "right") {
-    if (newDirection === "up" || newDirection === "down") {
-      direction = newDirection;
-    }
-  }
 }
 
 function startGame() {
-  if (!setIntervalid) setIntervalid = setInterval(loopGame, 100);
+    if (!setIntervalid) setIntervalid = setInterval(loopGame, 800);
 }
+
 function pauseGame() {
-  clearInterval(setIntervalid);
-  setIntervalid = null;
+    clearInterval(setIntervalid);
+    setIntervalid = null;
 }
+
 function restartGame() {
-  headtop = 20;
-  headleft = 20;
+    headtop = 20;
+    headleft = 20;
+    direction = "up";
+    pauseGame(); 
+    render();
 }
+
 function loopGame() {
-  switch (direction) {
-    case "up":
-      goUp();
-      break;
-    case "left":
-      goleft();
-      break;
-    case "right":
-      goRight();
-      break;
-    case "down":
-      goDown();
-      break;
-  }
+    switch (direction) {
+        case "up":
+            goUp();
+            break;
+        case "down":
+            goDown();
+            break;
+        case "left":
+            goleft();
+            break;
+        case "right":
+            goRight();
+            break;
+    }
 }
+
 function keyControl(event) {
-  const keyboard = event.key;
-  if (keyboard == "ArrowUp") {
-    changeDirection("up");
-  } else if (keyboard == "ArrowDown") {
-    changeDirection("down");
-  } else if (keyboard == "ArrowRight") {
-    changeDirection("right");
-  } else if (keyboard == "ArrowLeft") {
-    changeDirection("left");
-  } else if (keyboard == "Space") {
-    startGame();
-  }
-  console.log(event);
+    const keyboard = event.key;
+    if (keyboard === "s") {
+        startGame();
+    } else if (keyboard === "P") {
+        pauseGame();
+    } else if (keyboard === "r") {
+        restartGame();
+    } else if (keyboard === "ArrowUp") {
+        changeDirection("up");
+    } else if (keyboard === "ArrowDown") {
+        changeDirection("down");
+    } else if (keyboard === "ArrowRight") {
+        changeDirection("right");
+    } else if (keyboard === "ArrowLeft") {
+        changeDirection("left");
+    }
 }
+
+
 document.addEventListener("keydown", keyControl);
 render();
