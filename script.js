@@ -84,8 +84,6 @@ function keyControl(event) {
     changeDirection("right");
   } else if (keyboard == "ArrowLeft") {
     changeDirection("left");
-  } else if (keyboard == "Space") {
-    startGame();
   }
   console.log(event);
 }
