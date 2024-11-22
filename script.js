@@ -94,7 +94,7 @@ function keyControl(event) {
     const keyboard = event.key;
     if (keyboard === "s") {
         startGame();
-    } else if (keyboard === "P") {
+    } else if (keyboard === "p") {
         pauseGame();
     } else if (keyboard === "r") {
         restartGame();
